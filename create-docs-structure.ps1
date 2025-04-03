@@ -112,6 +112,21 @@ $files = @(
     "$RootDir\standards\security-practices.md"
 )
 
+# Add service-specific README files
+$services = @(
+    "user-service", "product-service", "inventory-service", "cart-service", "order-service",
+    "payment-service", "shipping-service", "auth-service", "notification-service", "search-service",
+    "review-service", "warehouse-service", "analytics-service", "discount-service", "vendor-service",
+    "commission-service", "accounts-service", "fraud-detection-service"
+)
+
+foreach ($service in $services) {
+    $serviceReadme = "$RootDir\services\$service\$service.md"
+    $workflow = "$RootDir\services\$service\workflow.md"
+    $files += $workflow
+    $files += $serviceReadme
+}
+
 foreach ($file in $files) {
     try {
         New-Item -Path $file -ItemType File -Force
